@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikp1bHkiLCJpZCI6IjY4NjJhNThmMDE2MzkzYTE3MDc4ZjA2NCIsImlhdCI6MTc1MTYzNTA2MX0.vderc-XG9thhBqOdNhAUvVEkSroj4E-UlriR-XUJLEc
+
+{
+  "title": "t-test9",
+  "author": "a-test9",
+  "url": "www.Warning: ",
+  "likes": 0
+}
