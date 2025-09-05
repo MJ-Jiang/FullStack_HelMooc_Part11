@@ -22,9 +22,9 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   }
 
   const savedBlog=await blog.save()
-     user.blogs = user.blogs.concat(savedBlog._id)
+  user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
- 
+
   const populatedBlog=await Blog.findById(savedBlog._id).populate('user',{
     username:1,
     name:1,

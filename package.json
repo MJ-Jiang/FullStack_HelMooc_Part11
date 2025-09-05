@@ -1,0 +1,25 @@
+{
+  "name": "fullstack-helmooc",
+  "private": true,
+  "workspaces": [
+    "bloglist-frontend",
+    "bloglist-backend",
+    "cypress"
+  ],
+  "scripts": {
+    "lint": "eslint --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0 bloglist-frontend bloglist-backend cypress --ignore-path .eslintignore",
+    "build": "npm -w bloglist-frontend run build && npm -w bloglist-backend run build --if-present",
+    "test": "npm -ws --if-present run test",
+    "dev": "concurrently -n front,back \"npm -w bloglist-frontend run dev\" \"npm -w bloglist-backend run dev\"",
+    "start": "concurrently -n api,web \"npm -w bloglist-backend run start\" \"npm -w bloglist-frontend run preview\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.0.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-cypress": "^2.15.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-vitest-globals": "^1.5.0"
+  }
+}

@@ -6,9 +6,7 @@ const app = require('../app')
 const helper = require('./test_helper')
 const Blog = require('../models/blog')
 const User = require('../models/user')
-
 const api = supertest(app)
-
 const testUser = {
   name: 'Test User',
   username: 'testuser',
@@ -144,7 +142,7 @@ describe('when there are initially some blogs saved', () => {
 
   describe('deletion of a blog', () => {
     test('succeeds with status code 204 if id is valid', async () => {
-      blogsAtStart = await helper.blogsInDb()
+      const blogsAtStart = await helper.blogsInDb()
       const blogToDelete = blogsAtStart[0]
 
       await api

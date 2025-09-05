@@ -114,7 +114,7 @@ describe('users', () => {
     assert.strictEqual(usersAtStart.length, usersAtEnd.length)
   })
 
-  test("same username can't be added twice", async () => {
+  test('same username can\'t be added twice', async () => {
     const newUser = {
       username: 'newuser',
       name: 'New User',

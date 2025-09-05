@@ -1,0 +1,15 @@
+node_modules
+dist
+.eslintrc.cjs
+node_modules
+**/node_modules
+dist
+build
+coverage
+*.log
+bloglist-frontend/vite.config.js
+# env files
+.env*
+.env.*.local
+cypress/screenshots
+cypress/videos

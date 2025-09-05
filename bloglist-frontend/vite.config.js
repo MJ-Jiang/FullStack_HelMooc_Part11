@@ -9,8 +9,8 @@ export default defineConfig({
     port:5173,
     strictPort:true,
     proxy: {
-      "/api": {
-        target: "http://localhost:3001",
+      '/api': {
+        target: 'http://localhost:3001',
         changeOrigin: true,
       },
     },
@@ -18,6 +18,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: './testSetup.js', 
+    setupFiles: './testSetup.js',
   }
 })
