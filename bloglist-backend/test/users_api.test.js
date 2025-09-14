@@ -77,12 +77,12 @@ describe('users', () => {
 
   test('user is not added if password length is 2 characters', async () => {
     const newUser = {
-      username: 'newuser',
+      username: 'user_test_psshort',
       name: 'New User',
       password: 'pw'
     }
 
-    const usersAtStart = await helper.usersInDb()
+    const usersAtStart = (await helper.usersInDb()).filter(u => u.username.startsWith('user_test_'))
 
     await api
       .post('/api/users')
@@ -90,19 +90,19 @@ describe('users', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    const usersAtEnd = await helper.usersInDb()
+    const usersAtEnd = (await helper.usersInDb()).filter(u => u.username.startsWith('user_test_'))
 
     assert.strictEqual(usersAtStart.length, usersAtEnd.length)
   })
 
   test('user is not added if username length is 2 characters', async () => {
     const newUser = {
-      username: 'nu',
+      username: 'pd',
       name: 'New User',
       password: 'password'
     }
 
-    const usersAtStart = await helper.usersInDb()
+    const usersAtStart = (await helper.usersInDb()).filter(u => u.username.startsWith('user_test_'))
 
     await api
       .post('/api/users')
@@ -110,7 +110,7 @@ describe('users', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    const usersAtEnd = await helper.usersInDb()
+    const usersAtEnd = (await helper.usersInDb()).filter(u => u.username.startsWith('user_test_'))
 
     assert.strictEqual(usersAtStart.length, usersAtEnd.length)
   })

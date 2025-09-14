@@ -11,7 +11,10 @@
     "build": "npm -w bloglist-frontend run build && npm -w bloglist-backend run build --if-present",
     "test": "npm -ws --if-present run test",
     "dev": "concurrently -n front,back \"npm -w bloglist-frontend run dev\" \"npm -w bloglist-backend run dev\"",
-    "start": "concurrently -n api,web \"npm -w bloglist-backend run start\" \"npm -w bloglist-frontend run preview\""
+    "start": "concurrently -n api,web \"npm -w bloglist-backend run start\" \"npm -w bloglist-frontend run preview\"",
+     "start:test": "npm --prefix bloglist-backend run start:test",
+  "test:e2e": "npm --prefix cypress run test:e2e",
+  "e2e": "concurrently \"npm run start:test\" \"npm run test:e2e\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

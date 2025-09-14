@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "test": "cypress run",
-    "open": "cypress open",
-    "verify": "cypress verify"
+    "test:e2e": "cypress run",
+    "open:e2e": "cypress open",
+    "verify:e2e": "cypress verify"
   },
   "devDependencies": {
     "cypress": "^13.13.0"
