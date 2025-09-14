@@ -2,11 +2,13 @@ const { test, describe, after, beforeEach, before } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const jwt = require('jsonwebtoken')
 const app = require('../app')
 const helper = require('./test_helper')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const api = supertest(app)
+require('dotenv').config()
 const testUser = {
   name: 'Test User',
   username: 'testuser',
@@ -17,20 +19,21 @@ let token
 let userId
 
 describe('when there are initially some blogs saved', () => {
-  before(async () => {
-    await User.deleteMany({})
-    let response = await api.post('/api/users').send(testUser)
-    userId = response.body.id
-
-    response = await api.post('/api/login').send(testUser)
-    token = response.body.token
-  })
-
   beforeEach(async () => {
+
     await Blog.deleteMany({})
-    await Blog.insertMany(
-      helper.initialBlogs.map(blog => ({ ...blog, user: userId }))
+    await User.deleteMany({})
+
+    const userResponse = await api.post('/api/users').send(testUser)
+    userId = userResponse.body.id
+
+    const loginResponse = await api.post('/api/login').send(testUser)
+    token = loginResponse.body.token
+
+    const blogObjects = helper.initialBlogs.map(
+      blog => new Blog({ ...blog, user: userId })
     )
+    await Promise.all(blogObjects.map(blog => blog.save()))
   })
 
   test('right amount of blogs are returned', async () => {
@@ -53,7 +56,8 @@ describe('when there are initially some blogs saved', () => {
         url: 'https://testurl.com/',
         likes: 5
       }
-
+      const decodedToken = jwt.verify(token, process.env.SECRET)
+      console.log('decoded token:', decodedToken)
       await api
         .post('/api/blogs')
         .set({ Authorization: `Bearer ${token}` })

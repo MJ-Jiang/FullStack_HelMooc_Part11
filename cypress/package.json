@@ -1,13 +1,14 @@
 {
   "name": "cypress",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
   "type": "commonjs",
-  "main": "index.js",
   "scripts": {
     "test": "cypress run",
-    "cypress:open": "cypress open"
+    "open": "cypress open",
+    "verify": "cypress verify"
+  },
+  "devDependencies": {
+    "cypress": "^13.13.0"
   }
 }

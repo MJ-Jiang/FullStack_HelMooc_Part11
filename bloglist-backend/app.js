@@ -10,8 +10,14 @@ const middleware = require('./utils/middleware')
 const testingRouter = require('./controllers/testing')
 const app = express()
 
-mongoose.connect(config.MONGODB_URI)
+const mongoUrl =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_MONGODB_URI
+    : process.env.MONGODB_URI
 
+mongoose.connect(mongoUrl)
+  .then(() => console.log('Connected to MongoDB:', mongoUrl))
+  .catch(err => console.error('Error connecting to MongoDB:', err.message))
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
